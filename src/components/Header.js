@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from '../../src/images/foo-app-logo.jpg';
 const Header = () =>{
     return (
@@ -7,9 +8,9 @@ const Header = () =>{
             </div>
             <div className="nav-items">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/about">About</Link></li>
+                    <li><Link to="/contact">Contact Us</Link></li>
                     <li><a href="#">Cart</a></li>
                 </ul>
             </div>

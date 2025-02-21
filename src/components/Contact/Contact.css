@@ -1,16 +1,17 @@
 .contact-container {
-    max-width: 600px;
+    max-width: 500px;
     margin: 40px auto;
     padding: 20px;
     text-align: center;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
   }
   
   .contact-container h1 {
     color: #333;
-    font-size: 28px;
+    font-size: 26px;
   }
   
   .contact-container p {
@@ -23,6 +24,7 @@
     flex-direction: column;
     gap: 15px;
     margin-top: 20px;
+    padding: 0 15px;
   }
   
   .contact-form input,
@@ -32,6 +34,7 @@
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 16px;
+    box-sizing: border-box;
   }
   
   .contact-form textarea {
