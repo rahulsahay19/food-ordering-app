@@ -6,6 +6,7 @@ import Body from "./src/components/Body";
 import About from "./src/components/About/About";
 import Contact from "./src/components/Contact/Contact";
 import Error from "./src/components/Error/Error";
+import RestaurantMenu from "./src/components/Restaurants/RestaurantMenu/RestaurantMenu";
 
 //routes
 const appRouter = createBrowserRouter([
@@ -26,7 +27,11 @@ const appRouter = createBrowserRouter([
         path:"/contact", //Contact
         element: <Contact/> 
       }
-    ]
+    ],
+  },
+  {
+    path: "/restaurants/:id",
+    element: <RestaurantMenu/>
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));

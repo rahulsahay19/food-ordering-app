@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import './RestaurantCard.css';
-const RestaurantCard = ({resName, cuisine, rating, eta, image}) =>{
+const RestaurantCard = ({id, resName, cuisine, rating, eta, image}) =>{
     return (
         <div className="card">
             <div className="card-image">
@@ -9,6 +10,8 @@ const RestaurantCard = ({resName, cuisine, rating, eta, image}) =>{
                 <h2>{resName}</h2>
                 <p>{cuisine}</p>
                 <p>⭐ {rating} | ⏱ {eta}</p>
+                {/* Link to View Menu */}
+                <Link to={`/restaurants/${id}`} className="view-menu">View Menu</Link>
             </div>
         </div>
     );

@@ -72,6 +72,7 @@ const Body = () =>{
         <div className="rest-cards">
           {displayRestaurants.map((restaurant) => (
             <RestaurantCard
+              id={restaurant.id}
               key={restaurant.id}
               resName={restaurant.resName}
               cuisine={restaurant.cuisine}
