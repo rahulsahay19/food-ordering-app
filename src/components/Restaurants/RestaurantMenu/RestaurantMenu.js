@@ -1,21 +1,13 @@
 import { Link, useParams } from "react-router-dom"
 import Header from "../../Header"
-import { useState } from "react";
 import "./RestaurantMenu.css";
+import useRestaurantMenu from "../../../Hooks/useRestaurantMenu";
 const RestaurantMenu = () =>{
     const {id} = useParams(); // This is Restaurant Id
-    const [restaurant, setRestaurant] = useState(null);
-
-    //Fetch the data
-    useState(()=>{
-        fetch(`http://localhost:3001/restaurants/${id}`)
-        .then((response) =>response.json())
-        .then((data) => setRestaurant(data))
-        .catch((error)=> console.error("Error Fetching Menu:", error));
-    }, [id]);
-
+    const {restaurant, loading} = useRestaurantMenu(id);
+   
     //show the loading
-    if(!restaurant){
+    if(loading || !restaurant){ //Ensures Restuarant is not null
         return <div className="loading">Loading Menus...</div>
     }
     return (

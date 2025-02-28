@@ -1,13 +1,15 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import AppLayout from "./src/components/AppLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Body from "./src/components/Body";
-import About from "./src/components/About/About";
-import Contact from "./src/components/Contact/Contact";
 import Error from "./src/components/Error/Error";
-import RestaurantMenu from "./src/components/Restaurants/RestaurantMenu/RestaurantMenu";
+import Spinner from "./src/components/Spinner/Spinner";
 
+//Lazy Load Components
+const About = lazy(() => import("./src/components/About/About"));
+const Contact = lazy(() => import("./src/components/Contact/Contact"));
+const RestaurantMenu = lazy(() => import("./src/components/Restaurants/RestaurantMenu/RestaurantMenu"));
 //routes
 const appRouter = createBrowserRouter([
   {
@@ -21,17 +23,29 @@ const appRouter = createBrowserRouter([
       },
       {
         path:"/about", //About
-        element: <About/> 
+        element: (
+          <Suspense fallback={<Spinner/>}>
+            <About/>
+          </Suspense>
+        ) 
       },
       {
         path:"/contact", //Contact
-        element: <Contact/> 
+        element: (
+          <Suspense fallback={<Spinner/>}>
+            <Contact/>
+          </Suspense>
+        ) 
       }
     ],
   },
   {
     path: "/restaurants/:id",
-    element: <RestaurantMenu/>
+    element: (
+      <Suspense fallback={<Spinner/>}>
+        <RestaurantMenu/>
+      </Suspense>
+    )
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));

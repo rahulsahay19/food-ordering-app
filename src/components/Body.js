@@ -1,32 +1,12 @@
 import { useState, useEffect } from "react";
 import RestaurantCard from "./Restaurants/RestaurantCard";
 import ShimmerCard from "./Shimmer/ShimmerCard";
+import useRestaurants from "../Hooks/useRestaurants";
 
 const Body = () =>{
     const [searchQuery, setSearchQuery] = useState('');
     const [showTopRated, setShowTopRated] = useState(false);
-    const [restaurants, setRestaurants] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    //Fetching the data and storing in state
-    const fetchData = async()=>{
-        try{
-            const response = await fetch('http://localhost:3001/restaurants');
-            const data = await response.json();
-            console.log(data);
-            setRestaurants(data);
-            setLoading(false);
-        }catch(error){
-            console.error('Error fetching data:', error);
-            setLoading(false);
-        }
-    }
-
-    useEffect(()=>{
-        console.log('Body component mounted');
-        fetchData();
-    },[]);
-    
+    const {restaurants, loading} = useRestaurants();  //Destructing 
     //Filter restaurants 
     const filteredRestaurants = restaurants.filter((restaurant)=>
         restaurant.resName.toLowerCase().includes(searchQuery.toLowerCase()));
