@@ -14,6 +14,7 @@ const About = lazy(() => import("./src/components/About/About"));
 const Contact = lazy(() => import("./src/components/Contact/Contact"));
 const RestaurantMenu = lazy(() => import("./src/components/Restaurants/RestaurantMenu/RestaurantMenu"));
 const Cart = lazy(() => import("./src/components/Cart/Cart"));
+const Login = lazy(() => import("./src/components/Login/Login"));
 //routes
 const appRouter = createBrowserRouter([
   {
@@ -56,6 +57,14 @@ const appRouter = createBrowserRouter([
     element: (
       <Suspense fallback={<Spinner/>}>
         <RestaurantMenu/>
+      </Suspense>
+    )
+  },
+  {
+    path: "/login",
+    element: (
+      <Suspense fallback={<Spinner/>}>
+        <Login/>
       </Suspense>
     )
   }
