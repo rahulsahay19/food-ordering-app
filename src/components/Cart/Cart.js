@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./Cart.css";
 import { useEffect } from "react";
-import { clearCart, removeFromCart } from "../../slice/cartSlice";
+import { clearCart, decreaseQuantity, increaseQuantity, removeFromCart } from "../../slice/cartSlice";
 const Cart = () =>{
     const cartItems = useSelector((state)=>state.cart.items); //Get cart items
     const dispatch = useDispatch();
@@ -30,6 +30,12 @@ const Cart = () =>{
                     <div className="cart-item-details">
                       <h3>{item.name}</h3>
                       <p>₹{item.price}</p>
+                    </div>
+                    {/* Quantity Buttons */}
+                    <div className="quantity-controls">
+                      <button onClick={()=>dispatch(decreaseQuantity(item.id))}>➖</button>
+                      <span>{item.quantity}</span>
+                      <button onClick={()=>dispatch(increaseQuantity(item.id))}>➕</button>
                     </div>
                     <button
                       className="remove-button"

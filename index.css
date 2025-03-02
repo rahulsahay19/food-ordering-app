@@ -20,29 +20,34 @@ body {
 }
 
 .nav-items ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  align-items: center; /* Ensure vertical alignment */
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
+/* Space Between Nav Links */
 .nav-items ul li {
-    margin-left: 20px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center; /* Align text and icon */
 }
 
 .nav-items ul li a {
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-    padding: 8px 12px;
-    transition: all 0.3s ease;
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
 }
 
 .nav-items ul li a:hover {
-    color: #ffffff;
-    background-color: #007bff;
-    border-radius: 5px;
+  color: #ffffff;
+  background-color: #007bff;
+  border-radius: 5px;
 }
+
 
 .body {
     padding: 20px;
@@ -87,3 +92,40 @@ body {
   .search-bar button:nth-child(3):hover {
     background-color: #b52a37;
   }
+
+  /* Cart Icon */
+.cart-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #333;
+  font-size: 18px;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.cart-icon:hover {
+  color: #ffffff;
+  background-color: #007bff;
+  border-radius: 5px;
+}
+
+/* Ensure Cart Icon is Same Height as Other Links */
+.cart-icon svg {
+  font-size: 22px;
+  vertical-align: middle;
+}
+
+/* Cart Count Badge */
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -5px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 14px;
+  margin-left: 5px;
+}

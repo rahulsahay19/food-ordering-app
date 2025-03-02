@@ -5,6 +5,7 @@ import useRestaurantMenu from "../../../Hooks/useRestaurantMenu";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../slice/cartSlice";
 import { store } from "../../../store/store";
+import { toast, ToastContainer } from "react-toastify";
 const RestaurantMenu = () =>{
     const {id} = useParams(); // This is Restaurant Id
     const {restaurant, loading} = useRestaurantMenu(id);
@@ -18,6 +19,16 @@ const RestaurantMenu = () =>{
     const handleAddToCart = (item) =>{
         console.log("Adding to cart:", item);
         dispatch(addToCart(item));
+        toast.success(`${item.name} added to cart!`,{
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored"
+        });
 
         //Log redux state after dispatch 
         setTimeout(()=>{
@@ -28,6 +39,8 @@ const RestaurantMenu = () =>{
         <div className="menu-container">
             {/* Header */}
             <Header/>
+            {/* Toast Notification */}
+            <ToastContainer/>
             {/* Back Button Link */}
             <Link to="/" className="back-button-top">⬅ Back to Home</Link>
 
