@@ -1,43 +1,60 @@
+import { useDispatch, useSelector } from "react-redux";
 import "./Cart.css";
+import { useEffect } from "react";
+import { clearCart, removeFromCart } from "../../slice/cartSlice";
 const Cart = () =>{
+    const cartItems = useSelector((state)=>state.cart.items); //Get cart items
+    const dispatch = useDispatch();
+
+    //calculate total items and price
+    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    useEffect(()=>{
+        console.log("Cart items updated:", cartItems);
+    }, [cartItems]);
+
     return (
         <div className="cart-container">
-            <h2 className="cart-title">🛒 Shopping Cart</h2>
-            {/* Empty Cart Message */}
+          <h2 className="cart-title">🛒 Shopping Cart</h2>
+    
+          {totalItems === 0 ? (
             <p className="empty-cart">Your cart is empty...</p>
-
-            {/* Cart Content */}
+          ) : (
             <div className="cart-content">
-                {/* Cart Items list */}
-                <div className="cart-items">
-                    <div className="cart-item">
-                        <img src="" alt="item-name" className="cart-item-image"/>
-                        <div className="cart-item-details">
-                            <h3>Item Name</h3>
-                            <p>₹ Price</p>
-                        </div>
-                        <button className="remove-button">❌ Remove</button>
+              {/* Cart Items List */}
+              <div className="cart-items">
+                {cartItems.map((item) => (
+                  <div className="cart-item" key={item.id}>
+                    <img src={item.image} alt={item.name} className="cart-item-image" />
+                    <div className="cart-item-details">
+                      <h3>{item.name}</h3>
+                      <p>₹{item.price}</p>
                     </div>
-                    <div className="cart-item">
-                        <img src="" alt="item-name" className="cart-item-image"/>
-                        <div className="cart-item-details">
-                            <h3>Item Name</h3>
-                            <p>₹ Price</p>
-                        </div>
-                        <button className="remove-button">❌ Remove</button>
-                    </div>
-                </div>
-                {/* Summamry section */}
-                <div className="cart-summary">
-                    <h3>Order Summary</h3>
-                    <p>Total Items: <strong>0</strong></p>
-                    <p>Total Price: <strong>0</strong></p>
-                    <button className="clear-cart-button">🗑️ Clear Cart</button>
-                    <button className="checkout-button">✅ Checkout</button>
-                </div>
+                    <button
+                      className="remove-button"
+                      onClick={() => dispatch(removeFromCart(item.id))}
+                    >
+                      ❌ Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+    
+              {/* Summary Section */}
+              <div className="cart-summary">
+                <h3>Order Summary</h3>
+                <p>Total Items: <strong>{totalItems}</strong></p>
+                <p>Total Price: <strong>₹{totalPrice}</strong></p>
+                <button className="clear-cart-button" onClick={() => dispatch(clearCart())}>
+                  🗑️ Clear Cart
+                </button>
+                <button className="checkout-button">✅ Checkout</button>
+              </div>
             </div>
+          )}
         </div>
-    );
-};
-
-export default Cart;
+      );
+    };
+    
+    export default Cart;

@@ -5,6 +5,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Body from "./src/components/Body";
 import Error from "./src/components/Error/Error";
 import Spinner from "./src/components/Spinner/Spinner";
+import { Provider } from "react-redux";
+import { persistor, store } from "./src/store/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 //Lazy Load Components
 const About = lazy(() => import("./src/components/About/About"));
@@ -58,5 +61,11 @@ const appRouter = createBrowserRouter([
   }
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter}/>);
+root.render(
+  <Provider store={store}>
+    <PersistGate loading={<Spinner/>} persistor={persistor}>
+      <RouterProvider router={appRouter}/>
+    </PersistGate>
+  </Provider>
+);
  

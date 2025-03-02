@@ -2,14 +2,28 @@ import { Link, useParams } from "react-router-dom"
 import Header from "../../Header"
 import "./RestaurantMenu.css";
 import useRestaurantMenu from "../../../Hooks/useRestaurantMenu";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../slice/cartSlice";
+import { store } from "../../../store/store";
 const RestaurantMenu = () =>{
     const {id} = useParams(); // This is Restaurant Id
     const {restaurant, loading} = useRestaurantMenu(id);
-   
+    const dispatch = useDispatch(); //Initialize redux dispatch
+    
     //show the loading
     if(loading || !restaurant){ //Ensures Restuarant is not null
         return <div className="loading">Loading Menus...</div>
     }
+    //Handle adding items to cart
+    const handleAddToCart = (item) =>{
+        console.log("Adding to cart:", item);
+        dispatch(addToCart(item));
+
+        //Log redux state after dispatch 
+        setTimeout(()=>{
+            console.log("Redux state after dispatch:", store.getState().cart.items);
+        },500);
+    };
     return (
         <div className="menu-container">
             {/* Header */}
@@ -24,7 +38,7 @@ const RestaurantMenu = () =>{
                 </div>
                 <div className="menu-list">
                     {restaurant.menu.map((item)=>(
-                    <div className="menu-item">
+                    <div className="menu-item" key={item.id}>
                         <div className="menu-info">
                             <h2>{item.name}</h2>
                             <p>₹{item.price}</p>
@@ -34,7 +48,7 @@ const RestaurantMenu = () =>{
                     
                     <div className="menu-image">
                         <img src={item.image} alt={item.name}/>
-                        <button className="add-button">ADD</button>
+                        <button className="add-button" onClick={()=>handleAddToCart(item)}>ADD</button>
                     </div>
                 </div>
                 ))}
