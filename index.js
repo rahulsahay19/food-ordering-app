@@ -10,6 +10,7 @@ import Spinner from "./src/components/Spinner/Spinner";
 const About = lazy(() => import("./src/components/About/About"));
 const Contact = lazy(() => import("./src/components/Contact/Contact"));
 const RestaurantMenu = lazy(() => import("./src/components/Restaurants/RestaurantMenu/RestaurantMenu"));
+const Cart = lazy(() => import("./src/components/Cart/Cart"));
 //routes
 const appRouter = createBrowserRouter([
   {
@@ -34,6 +35,14 @@ const appRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Spinner/>}>
             <Contact/>
+          </Suspense>
+        ) 
+      },
+      {
+        path:"/cart", //Cart
+        element: (
+          <Suspense fallback={<Spinner/>}>
+            <Cart/>
           </Suspense>
         ) 
       }
