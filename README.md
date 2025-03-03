@@ -88,6 +88,14 @@ npm start
 
 ![Image](https://github.com/user-attachments/assets/c9c9b3be-ccce-4bce-ae2d-352e9febe25b)
 
+# Solution Walkthrough
+
+![Image](https://github.com/user-attachments/assets/7cb8b185-6283-46bb-a8b7-af1028554f49)
+
+# API Walkthrough
+
+![Image](https://github.com/user-attachments/assets/07688daf-1586-49a9-af95-3e2d2c92738e)
+
 # Parcel Features
 - Dev Build
 - Local Server
